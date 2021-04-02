@@ -1,0 +1,57 @@
+﻿@model IEnumerable<Clase3MVC.Models.Persona>
+
+@{
+    ViewData["Title"] = "Index";
+    //Recupero la lista de personas
+    List<Persona> personas = ViewData[nameof(Persona)] as List<Persona>;
+}
+
+<h1>Index</h1>
+@{  
+    //abrimos C#, porque es la parte que se va a repetir, para cada item en modelo, modelo es tipo dependiendo la vista,
+    //en este caso, modelo es inumerable de Persona, es decir cada uno va a ser una persona
+}
+<p>
+   <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        
+
+        @foreach (var item in personas)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.ActionLink("Editar", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Detalles", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Eliminar", "Delete", new { id = item.Id })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
